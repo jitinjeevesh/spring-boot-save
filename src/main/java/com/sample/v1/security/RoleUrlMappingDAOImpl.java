@@ -1,8 +1,7 @@
-package sample.dao;
+package com.sample.v1.security;
 
 import com.oauth.dao.RoleUrlMappingDAO;
 import com.oauth.data.RoleUrlMapping;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

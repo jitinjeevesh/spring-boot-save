@@ -1,7 +1,9 @@
-package sample.repository;
+package com.sample.core.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sample.domain.User;
+import com.sample.core.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    User findByEmail(String email);
 }

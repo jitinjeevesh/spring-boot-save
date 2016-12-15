@@ -1,4 +1,4 @@
-package sample;
+package com.sample.v1;
 
 public class RequestCommand {
     String message;

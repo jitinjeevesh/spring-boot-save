@@ -1,4 +1,4 @@
-package sample;
+package com.sample.v1;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;

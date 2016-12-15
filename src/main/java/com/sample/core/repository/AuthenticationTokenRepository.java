@@ -1,8 +1,7 @@
-package sample.repository;
+package com.sample.core.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sample.domain.AuthenticationToken;
-import sample.domain.User;
+import com.sample.core.domain.AuthenticationToken;
 
 public interface AuthenticationTokenRepository extends JpaRepository<AuthenticationToken, Long> {
 }

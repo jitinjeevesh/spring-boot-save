@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class RESTLogoutCustomHandler implements LogoutHandler {
-    @Autowired
+    @Autowired(required = false)
     private LogoutDAO logoutDAO;
     @Autowired
     private RESTSecurityConfig restSecurityConfig;

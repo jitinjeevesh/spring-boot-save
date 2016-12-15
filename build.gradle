@@ -21,8 +21,8 @@ apply plugin: 'io.spring.dependency-management'
     baseName = 'spring-boot-template'
     version = '0.0.1-SNAPSHOT'
 }*/
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 ext {
     scalaVersion = '2.10'
@@ -42,14 +42,14 @@ configurations {
     providedRuntime
 }
 
-project(':Spring-security-REST') {
+/*project(':Spring-security-REST') {
     configurations {
         providedRuntime
     }
     dependencies {
         providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     }
-}
+}*/
 
 dependencies {
     compile project(':Spring-security-REST')
@@ -77,5 +77,5 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 springBoot {
-    mainClass = "sample.Application"
+    mainClass = "com.sample.Application"
 }

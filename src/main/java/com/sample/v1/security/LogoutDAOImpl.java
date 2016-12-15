@@ -1,4 +1,4 @@
-package sample.dao;
+package com.sample.v1.security;
 
 import com.oauth.dao.LogoutDAO;
 import org.slf4j.Logger;

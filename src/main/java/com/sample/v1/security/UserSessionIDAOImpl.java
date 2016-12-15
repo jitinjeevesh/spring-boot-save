@@ -1,4 +1,4 @@
-package sample.dao;
+package com.sample.v1.security;
 
 import com.oauth.dao.AuthenticationTokenDAO;
 import com.oauth.service.RESTSpringSecurityService;

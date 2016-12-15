@@ -1,4 +1,4 @@
-package sample.domain;
+package com.sample.core.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
