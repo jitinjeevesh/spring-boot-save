@@ -26,8 +26,8 @@ public class AuthController extends ResponseGenerator {
     }
 
     @RequestMapping("/register")
-    public void register(@Validated @RequestBody RegistrationRequest registrationCO, BindingResult bindingResult) {
-        authService.register(registrationCO);
+    public ResponseDTO register(@Validated @RequestBody RegistrationRequest registrationCO, BindingResult bindingResult) {
+        return response(() -> authService.register(registrationCO).bindingResult(bindingResult));
     }
 
     @RequestMapping("/logout")

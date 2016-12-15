@@ -3,7 +3,7 @@ package com.sample.v1.request;
 public class RegistrationRequest implements Request {
 
     private String name;
-    private Integer mobileNumber;
+    private Long mobileNumber;
 
     public String getName() {
         return name;
@@ -13,11 +13,11 @@ public class RegistrationRequest implements Request {
         this.name = name;
     }
 
-    public Integer getMobileNumber() {
+    public Long getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(Integer mobileNumber) {
+    public void setMobileNumber(Long mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 }

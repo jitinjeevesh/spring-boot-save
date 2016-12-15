@@ -19,6 +19,10 @@ public class UserDao implements Dao {
         return userRepository.findByEmail(email);
     }
 
+    public User findByPhone(String phoneNumber) {
+        return userRepository.findByPhone(phoneNumber);
+    }
+
     public User save(User user) {
         return userRepository.save(user);
     }

@@ -22,13 +22,13 @@ public abstract class ResponseGenerator implements Generator {
         ResponseDTO<Object> responseDTO = null;
         Response response = supplier.get();
         if (!response.bindingResult().hasErrors()) {
-            responseDTO = (ResponseDTO<Object>) new SuccessResponseDTO.SuccessResponseBuilder<>()
+            responseDTO = new SuccessResponseDTO.SuccessResponseBuilder<>()
                     .setData(response)
-                    .setMessage((response.successMessage() != null) ? response.successMessage() : "");
+                    .setMessage((response.successMessage() != null) ? response.successMessage() : "").build();
         } else {
-            responseDTO = (ResponseDTO<Object>) new ErrorResponseDTO.ErrorResponseBuilder<>()
+            responseDTO = new ErrorResponseDTO.ErrorResponseBuilder<>()
                     .setData(OBJECT)
-                    .setMessage(messageUtil.getMessage(response.bindingResult().getAllErrors().get(0).getDefaultMessage()));
+                    .setMessage(messageUtil.getMessage(response.bindingResult().getAllErrors().get(0).getDefaultMessage())).build();
         }
         return responseDTO;
     }

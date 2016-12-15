@@ -19,7 +19,17 @@ public class AuthService implements IService {
     @Autowired
     private RoleDao roleDao;
 
-    public void register(RegistrationRequest registrationCO) {
+    public Response register(RegistrationRequest registrationCO) {
+        User user = new User();
+        user.setName(registrationCO.getName());
+        user.setPhone(registrationCO.getMobileNumber().toString());
+        user.setRole(roleDao.getUserRole());
+        user = userDao.save(user);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setId(user.getId());
+        loginResponse.setName(user.getName());
+        loginResponse.setPhone(user.getPhone());
+        return loginResponse;
     }
 
     public Response login(LoginRequest loginCO) {

@@ -13,11 +13,19 @@ public class RoleDao implements Dao {
     private RoleRepository roleRepository;
 
     public Role getUserRole() {
-        return findByRole(Roles.ROLE_USER.getName());
+        Role role = findByRole(Roles.ROLE_USER.getName());
+        if (role == null) {
+            role = create(new Role.Builder().setUserRole(Roles.ROLE_USER.getName()).build());
+        }
+        return role;
     }
 
     public Role findByRole(String role) {
         return roleRepository.findByUserRole(role);
+    }
+
+    public Role create(Role role) {
+        return roleRepository.save(role);
     }
 
 }

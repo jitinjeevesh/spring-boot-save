@@ -24,7 +24,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 
@@ -77,8 +77,8 @@ public class User {
     }
 
     public User setRole(Role role) {
-        if (roles.isEmpty()) {
-            roles = new ArrayList<>();
+        if (roles == null) {
+            roles = new ArrayList<Role>();
         }
         roles.add(role);
         return this;
