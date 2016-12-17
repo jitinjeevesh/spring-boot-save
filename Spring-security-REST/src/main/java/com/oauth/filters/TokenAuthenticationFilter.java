@@ -8,6 +8,7 @@ import com.oauth.data.AuthenticationToken;
 import com.oauth.data.RoleUrlMapping;
 import com.oauth.data.User;
 import com.oauth.service.RESTSecurityUserDetails;
+import com.oauth.utils.HeaderMapRequestWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
     private RESTSecurityConfig restSecurityConfig;
 
     private String token = null;
+    private String userId = null;
 
     public TokenAuthenticationFilter() {
         super("/");
@@ -90,7 +92,13 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
         } else {
             throw new AuthenticationServiceException(MessageFormat.format("Error | {0}", "Bad Token"));
         }
-        chain.doFilter(request, response);
+        if (userId != null) {
+            HeaderMapRequestWrapper headerWrapper = new HeaderMapRequestWrapper(request);
+            headerWrapper.addHeader("userId", userId);
+            chain.doFilter(headerWrapper, response);
+        } else {
+            chain.doFilter(request, response);
+        }
     }
 
     private boolean grantAuthentication(ServletRequest req, ServletResponse res) {
@@ -115,7 +123,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
         if (token == null) {
             throw new AuthenticationServiceException(MessageFormat.format("Error | {0}", "Bad Token"));
         }
-        AbstractAuthenticationToken userAuthenticationToken = authUserByToken(response, request.getRequestURI(), token);
+        AbstractAuthenticationToken userAuthenticationToken = authUserByToken(response, request, token);
         if (userAuthenticationToken == null)
             throw new AuthenticationServiceException("Invalid Token");
         return userAuthenticationToken;
@@ -135,17 +143,17 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
      *
      * @return
      */
-    private AbstractAuthenticationToken authUserByToken(HttpServletResponse response,String uri, String token) throws AuthenticationException {
+    private AbstractAuthenticationToken authUserByToken(HttpServletResponse response, HttpServletRequest request, String token) throws AuthenticationException {
         if (token == null) return null;
         AuthenticationToken authenticationToken = authenticationTokenDAO.find(token);
         if (authenticationToken == null) {
             throw new AuthenticationServiceException(MessageFormat.format("Error | {0}", "Bad Token"));
         }
         User user = userDetailDAO.fetchUser(authenticationToken.getUsername());
-        if (!isURIAuthenticate(user, uri)) {
+        if (!isURIAuthenticate(user, request.getRequestURI())) {
             throw new AccessDeniedException(MessageFormat.format("Error | {0}", "Access denied"));
         }
-
+        this.userId = user.getId();
         RESTSecurityUserDetails restSecurityUserDetails = new RESTSecurityUserDetails(Arrays.asList(new SimpleGrantedAuthority(user.getUserRole().getRole())), user.getUserMail(), user.getPassword(), true, authenticationToken);
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(restSecurityUserDetails, user.getPassword(), Arrays.asList(new SimpleGrantedAuthority(user.getUserRole().getRole())));

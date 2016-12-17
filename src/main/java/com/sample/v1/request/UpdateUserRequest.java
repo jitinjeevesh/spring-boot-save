@@ -2,7 +2,7 @@ package com.sample.v1.request;
 
 import javax.validation.constraints.NotNull;
 
-public class LoginRequest implements Request {
+public class UpdateUserRequest implements Request {
     @NotNull(message = "Name must not be null")
     private String name;
     @NotNull(message = "Mobile number must not be null")

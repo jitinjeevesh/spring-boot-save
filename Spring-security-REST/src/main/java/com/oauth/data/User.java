@@ -6,7 +6,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
 
     private String userMail;
 
@@ -21,7 +21,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id, String userMail, String firstName, String lastName, String password, UserRole userRole) {
+    public User(String id, String userMail, String firstName, String lastName, String password, UserRole userRole) {
         this.id = id;
         this.userMail = userMail;
         this.firstName = firstName;
@@ -30,11 +30,11 @@ public class User implements Serializable {
         this.userRole = userRole;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

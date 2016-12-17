@@ -2,8 +2,6 @@ package com.sample.v1.controller;
 
 import com.sample.generator.ResponseGenerator;
 import com.sample.response.ResponseDTO;
-import com.sample.v1.request.LoginRequest;
-import com.sample.v1.request.LogoutRequest;
 import com.sample.v1.request.RegistrationRequest;
 import com.sample.v1.service.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +22,5 @@ public class AuthController extends ResponseGenerator {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseDTO validateMobile(@Validated @RequestBody final RegistrationRequest registrationRequest, BindingResult bindingResult) {
         return response(() -> authServiceImpl.register(registrationRequest).bindingResult(bindingResult));
-    }
-
-    @RequestMapping("/login")
-    public ResponseDTO login(@Validated @RequestBody final LoginRequest loginCO, BindingResult bindingResult) {
-        return response(() -> authServiceImpl.login(loginCO).bindingResult(bindingResult));
-    }
-
-    @RequestMapping(value = "/dumy", method = RequestMethod.POST)
-    public void logout(@Validated @RequestBody(required = false) LogoutRequest logoutCO, BindingResult bindingResult) {
-        authServiceImpl.logout(logoutCO);
     }
 }

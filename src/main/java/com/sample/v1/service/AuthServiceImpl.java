@@ -10,7 +10,7 @@ import com.sample.core.domain.DigitAuthentication;
 import com.sample.core.domain.User;
 import com.sample.response.Response;
 import com.sample.security.UserSessionIDAOImpl;
-import com.sample.v1.request.LoginRequest;
+import com.sample.v1.request.UpdateUserRequest;
 import com.sample.v1.request.LogoutRequest;
 import com.sample.v1.request.RegistrationRequest;
 import com.sample.v1.response.LoginResponse;
@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
         return registrationResponse;
     }
 
-    public Response login(LoginRequest loginCO) {
+    public Response login(UpdateUserRequest loginCO) {
         User user = new User();
         user.setName(loginCO.getName());
         user.setPhone(loginCO.getMobileNumber());

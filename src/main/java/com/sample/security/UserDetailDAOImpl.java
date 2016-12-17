@@ -29,6 +29,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         UserRole userRole = new UserRole();
         userRole.setRole(roles.stream().findFirst().get().getUserRole());
         com.oauth.data.User user1 = new com.oauth.data.User();
+        user1.setId(user.getId().toString());
         user1.setUserMail(user.getPhone());
         user1.setUserRole(userRole);
         return user1;

@@ -19,7 +19,7 @@ public class RoleUrlMappingDAOImpl implements RoleUrlMappingDAO {
         userRoleUrlMapping.setUrls(new ArrayList<String>() {{
             add("/api/user");
             add("/api/open");
-            add("/api/v1/auth/dumy");
+            add("/api/v1/user/demo");
         }});
 
         RoleUrlMapping adminRoleUrlMapping = new RoleUrlMapping();
