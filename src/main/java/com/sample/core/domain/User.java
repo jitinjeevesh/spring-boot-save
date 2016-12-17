@@ -1,5 +1,7 @@
 package com.sample.core.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "first_name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "phone", nullable = false)
@@ -23,6 +25,11 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", nullable = false, name = "authentication_id")
+    @Type(type = "long")
+    private Authentication authentication;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -82,5 +89,13 @@ public class User {
         }
         roles.add(role);
         return this;
+    }
+
+    public Authentication getAuthentication() {
+        return authentication;
+    }
+
+    public void setAuthentication(Authentication authentication) {
+        this.authentication = authentication;
     }
 }

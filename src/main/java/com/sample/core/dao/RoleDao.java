@@ -4,9 +4,10 @@ import com.sample.core.domain.Role;
 import com.sample.core.repository.RoleRepository;
 import com.sample.core.util.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class RoleDao implements Dao {
 
     @Autowired

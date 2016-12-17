@@ -3,9 +3,10 @@ package com.sample.core.dao;
 import com.sample.core.domain.User;
 import com.sample.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class UserDao implements Dao {
 
     @Autowired
@@ -19,7 +20,7 @@ public class UserDao implements Dao {
         return userRepository.findByEmail(email);
     }
 
-    public User findByPhone(String phoneNumber) {
+    public User findByMobileNumber(String phoneNumber) {
         return userRepository.findByPhone(phoneNumber);
     }
 

@@ -5,7 +5,6 @@ import com.sample.response.ResponseDTO;
 import com.sample.v1.request.LoginRequest;
 import com.sample.v1.request.LogoutRequest;
 import com.sample.v1.request.RegistrationRequest;
-import com.sample.v1.request.ValidateMobileRequest;
 import com.sample.v1.service.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -22,9 +21,9 @@ public class AuthController extends ResponseGenerator {
     @Autowired
     private AuthServiceImpl authServiceImpl;
 
-    @RequestMapping(value = "/validateMobile", method = RequestMethod.POST)
-    public ResponseDTO validateMobile(@Validated @RequestBody final ValidateMobileRequest validateMobileRequest, BindingResult bindingResult) {
-        return response(() -> authServiceImpl.validateMobile(validateMobileRequest).bindingResult(bindingResult));
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseDTO validateMobile(@Validated @RequestBody final RegistrationRequest registrationRequest, BindingResult bindingResult) {
+        return response(() -> authServiceImpl.register(registrationRequest).bindingResult(bindingResult));
     }
 
     @RequestMapping("/login")
@@ -32,13 +31,8 @@ public class AuthController extends ResponseGenerator {
         return response(() -> authServiceImpl.login(loginCO).bindingResult(bindingResult));
     }
 
-    @RequestMapping("/register")
-    public ResponseDTO register(@Validated @RequestBody RegistrationRequest registrationCO, BindingResult bindingResult) {
-        return response(() -> authServiceImpl.register(registrationCO).bindingResult(bindingResult));
-    }
-
-    @RequestMapping("/logout")
-    public void logout(@Validated @RequestBody LogoutRequest logoutCO, BindingResult bindingResult) {
+    @RequestMapping(value = "/dumy", method = RequestMethod.POST)
+    public void logout(@Validated @RequestBody(required = false) LogoutRequest logoutCO, BindingResult bindingResult) {
         authServiceImpl.logout(logoutCO);
     }
 }

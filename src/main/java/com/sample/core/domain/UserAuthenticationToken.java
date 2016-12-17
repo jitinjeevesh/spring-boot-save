@@ -6,12 +6,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "authentication_token")
-public class AuthenticationToken implements Serializable {
+public class UserAuthenticationToken implements Serializable {
 
     @Id
-    @Column(name = "token_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer token_id;
+    private Integer id;
 
     @Column(name = "token")
     private String token;
@@ -20,16 +19,16 @@ public class AuthenticationToken implements Serializable {
     @Column(name = "expiry_datetime", nullable = false)
     private Date expiryDateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    private User user;
 
-    public Integer getToken_id() {
-        return token_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setToken_id(Integer token_id) {
-        this.token_id = token_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getToken() {
@@ -48,12 +47,12 @@ public class AuthenticationToken implements Serializable {
         this.expiryDateTime = expiryDateTime;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
