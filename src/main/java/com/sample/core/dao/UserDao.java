@@ -23,6 +23,10 @@ public class UserDao implements Dao {
         return userRepository.findByPhone(phoneNumber);
     }
 
+    public Long countByPhone(String phoneNumber) {
+        return userRepository.countByPhone(phoneNumber);
+    }
+
     public User save(User user) {
         return userRepository.save(user);
     }
