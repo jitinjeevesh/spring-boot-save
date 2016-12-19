@@ -1,12 +1,12 @@
 package com.sample.v1.request;
 
-import javax.validation.constraints.NotNull;
+import com.sample.constraints.annotation.StringSize;
 
-public class UpdateUserRequest implements Request {
-    @NotNull(message = "Name must not be null")
+public class UpdateUserRequest extends AuthenticateRequest {
+    @StringSize(message = "blank.registration.name.error.message")
     private String name;
-    @NotNull(message = "Mobile number must not be null")
-    private String mobileNumber;
+    @StringSize(message = "blank.blood.group.error.message")
+    private String bloodGroup;
 
     public String getName() {
         return name;
@@ -16,11 +16,11 @@ public class UpdateUserRequest implements Request {
         this.name = name;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getBloodGroup() {
+        return bloodGroup;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
     }
 }

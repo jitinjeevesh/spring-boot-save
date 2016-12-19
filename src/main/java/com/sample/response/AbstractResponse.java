@@ -27,4 +27,8 @@ public abstract class AbstractResponse implements Response {
     public String successMessage() {
         return this.successMessage;
     }
+
+    public abstract static class Builder {
+        public abstract Response build();
+    }
 }

@@ -60,11 +60,10 @@ public class AuthServiceImpl implements AuthService {
     public Response login(UpdateUserRequest loginCO) {
         User user = new User();
         user.setName(loginCO.getName());
-        user.setPhone(loginCO.getMobileNumber());
+        user.setPhone(loginCO.getBloodGroup());
         user.setRole(roleDao.getUserRole());
         user = userDao.save(user);
         LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setId(user.getId());
         loginResponse.setName(user.getName());
         loginResponse.setPhone(user.getPhone());
         return loginResponse;

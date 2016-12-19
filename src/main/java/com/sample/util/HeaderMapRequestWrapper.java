@@ -1,4 +1,4 @@
-package com.oauth.utils;
+package com.sample.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

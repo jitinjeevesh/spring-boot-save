@@ -8,7 +8,7 @@ import com.oauth.data.AuthenticationToken;
 import com.oauth.data.RoleUrlMapping;
 import com.oauth.data.User;
 import com.oauth.service.RESTSecurityUserDetails;
-import com.oauth.utils.HeaderMapRequestWrapper;
+import com.oauth.utils.SecurityHeaderMapRequestWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +93,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
             throw new AuthenticationServiceException(MessageFormat.format("Error | {0}", "Bad Token"));
         }
         if (userId != null) {
-            HeaderMapRequestWrapper headerWrapper = new HeaderMapRequestWrapper(request);
+            SecurityHeaderMapRequestWrapper headerWrapper = new SecurityHeaderMapRequestWrapper(request);
             headerWrapper.addHeader("userId", userId);
             chain.doFilter(headerWrapper, response);
         } else {

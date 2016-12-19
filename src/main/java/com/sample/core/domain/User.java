@@ -26,6 +26,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "blood_group")
+    private String bloodGroup;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "id", nullable = false, name = "authentication_id")
     @Type(type = "long")
@@ -97,5 +100,13 @@ public class User {
 
     public void setAuthentication(Authentication authentication) {
         this.authentication = authentication;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
     }
 }
