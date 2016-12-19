@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class AuthenticationToken implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer token_id;
+    private Long token_id;
     private String token;
     private Date expiryDateTime;
     private String username;
@@ -22,18 +22,18 @@ public class AuthenticationToken implements Serializable {
         this.token = token;
     }
 
-    public AuthenticationToken(Integer token_id, String token, Date expiryDateTime, String username) {
+    public AuthenticationToken(Long token_id, String token, Date expiryDateTime, String username) {
         this.token_id = token_id;
         this.token = token;
         this.expiryDateTime = expiryDateTime;
         this.username = username;
     }
 
-    public Integer getToken_id() {
+    public Long getToken_id() {
         return token_id;
     }
 
-    public void setToken_id(Integer token_id) {
+    public void setToken_id(Long token_id) {
         this.token_id = token_id;
     }
 

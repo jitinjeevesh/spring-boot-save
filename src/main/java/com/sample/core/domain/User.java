@@ -1,5 +1,7 @@
 package com.sample.core.domain;
 
+import com.sample.core.entity.CommonDataEntity;
+import com.sample.core.entity.CommonVersionEntity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -8,11 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "phone")})
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends CommonDataEntity {
 
     @Column(name = "email")
     private String email;
@@ -37,14 +35,6 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

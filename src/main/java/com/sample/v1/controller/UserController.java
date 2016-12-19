@@ -2,6 +2,7 @@ package com.sample.v1.controller;
 
 import com.sample.generator.ResponseGenerator;
 import com.sample.response.ResponseDTO;
+import com.sample.v1.request.BloodRequestRequest;
 import com.sample.v1.request.UpdateUserRequest;
 import com.sample.v1.service.AuthServiceImpl;
 import com.sample.v1.service.UserServiceImpl;
@@ -22,6 +23,14 @@ public class UserController extends ResponseGenerator {
         return response(() -> {
             updateUserRequest.setUserId(userId);
             return userService.update(updateUserRequest).bindingResult(bindingResult);
+        });
+    }
+
+    @RequestMapping(value = "/requestBlood", method = RequestMethod.PUT)
+    public ResponseDTO requestBlood(@Validated @RequestBody final BloodRequestRequest bloodRequestRequest, BindingResult bindingResult, @RequestHeader(name = "user_id", required = true) String userId) {
+        return response(() -> {
+            bloodRequestRequest.setUserId(userId);
+            return userService.bloodRequest(bloodRequestRequest).bindingResult(bindingResult);
         });
     }
 }

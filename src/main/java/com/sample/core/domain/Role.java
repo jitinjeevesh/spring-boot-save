@@ -1,14 +1,12 @@
 package com.sample.core.domain;
 
+import com.sample.core.entity.CommonDataEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
-public class Role {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Role extends CommonDataEntity {
 
     @Column(name = "role_user", nullable = false)
     private String userRole;
@@ -22,14 +20,6 @@ public class Role {
     public Role(Builder builder) {
         this.userRole = builder.userRole;
         this.roleDescription = builder.roleDescription;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUserRole() {
