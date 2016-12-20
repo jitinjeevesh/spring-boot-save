@@ -9,6 +9,7 @@ import com.sample.v1.request.BloodRequestRequest;
 import com.sample.v1.request.UpdateUserRequest;
 import com.sample.v1.response.BloodRequestResponse;
 import com.sample.v1.response.UpdateUserResponse;
+import com.sample.v1.response.UserDetailResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,16 @@ public class UserServiceImpl implements UserService {
         bloodRequest.setRequestedBy(user);
         bloodRequestDao.save(bloodRequest);
         return new BloodRequestResponse.BloodRequestResponseBuilder()
+                .setName(user.getName())
+                .setPhone(user.getPhone())
+                .setBloodGroup(user.getBloodGroup())
+                .build();
+    }
+
+    public Response detail(Long id, Long userId) {
+        User user = userDao.get(id);
+        User loginUser = userDao.get(userId);
+        return new UserDetailResponse.UserDetailResponseBuilder()
                 .setName(user.getName())
                 .setPhone(user.getPhone())
                 .setBloodGroup(user.getBloodGroup())

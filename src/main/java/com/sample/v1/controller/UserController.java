@@ -33,4 +33,9 @@ public class UserController extends ResponseGenerator {
             return userService.bloodRequest(bloodRequestRequest).bindingResult(bindingResult);
         });
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseDTO detail(@PathVariable(value = "id") Long id, @RequestHeader(name = "user_id", required = true) String userId) {
+        return response(() -> userService.detail(id, Long.valueOf(userId)));
+    }
 }
