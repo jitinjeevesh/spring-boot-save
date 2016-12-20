@@ -16,6 +16,7 @@ import com.sample.v1.request.UpdateUserRequest;
 import com.sample.v1.response.LoginResponse;
 import com.sample.v1.response.RegistrationResponse;
 import com.sample.v1.response.UpdateUserResponse;
+import com.sample.v1.response.UserDetailResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,15 @@ public class UserServiceImpl implements UserService {
                 .setBloodGroup(user.getBloodGroup())
                 .build();
         return response;
+    }
+
+    public Response detail(Long id, Long userId) {
+        User user = userDao.get(id);
+        User loginUser = userDao.get(userId);
+        return new UserDetailResponse.UserDetailResponseBuilder()
+                .setName(user.getName())
+                .setPhone(user.getPhone())
+                .setBloodGroup(user.getBloodGroup())
+                .build();
     }
 }
