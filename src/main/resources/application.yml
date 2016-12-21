@@ -14,5 +14,5 @@ spring:
     min-evictable-idle-time-millis: 300000
 
   jpa:
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     show-sql: true

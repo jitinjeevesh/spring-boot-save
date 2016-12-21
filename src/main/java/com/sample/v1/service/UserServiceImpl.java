@@ -5,6 +5,7 @@ import com.sample.core.dao.UserDao;
 import com.sample.core.domain.BloodRequest;
 import com.sample.core.domain.User;
 import com.sample.response.Response;
+import com.sample.service.AbstractService;
 import com.sample.v1.request.BloodRequestRequest;
 import com.sample.v1.request.UpdateUserRequest;
 import com.sample.v1.response.BloodRequestResponse;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractService implements UserService {
 
     @Autowired
     private UserDao userDao;
@@ -50,7 +51,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public Response detail(Long id, Long userId) {
+        isNullObjectWithException(id, "null.user.id.error.message");
         User user = userDao.get(id);
+        isNullObjectWithException(user, "null.user.error.message");
         User loginUser = userDao.get(userId);
         return new UserDetailResponse.UserDetailResponseBuilder()
                 .setName(user.getName())

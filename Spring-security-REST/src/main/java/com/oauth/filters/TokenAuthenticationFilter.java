@@ -166,8 +166,13 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
         try {
             if (!roleUrlMappings.isEmpty()) {
                 for (RoleUrlMapping roleUrlMapping : roleUrlMappings) {
-                    System.out.println(roleUrlMapping);
                     if (roleUrlMapping.getRole().equalsIgnoreCase(user.getUserRole().getRole())) {
+                        //TODO:Change this logic for url macthing.
+                        for (String url : roleUrlMapping.getUrls()) {
+                            if (uri.contains(url)) {
+                                return true;
+                            }
+                        }
                         return roleUrlMapping.getUrls().contains(uri);
                     }
                 }
