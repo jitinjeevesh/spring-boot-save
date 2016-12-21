@@ -34,7 +34,6 @@ public class AuthServiceImpl implements AuthService {
 
     public Response register(RegistrationRequest registrationRequest) {
         User user = userDao.findByMobileNumber(registrationRequest.getMobileNumber());
-        Boolean isValidated = user == null;
         if (user == null) {
             Authentication authentication = new DigitAuthentication.DigitAuthenticationBuilder()
                     .setSecret(registrationRequest.getdSecret())
@@ -52,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
         }
         RESTSecurityUserDetails restSecurityUserDetails = restSpringSecurityService.authenticate(user.getPhone(), "");
         RegistrationResponse registrationResponse = new RegistrationResponse();
-        registrationResponse.setValidate(!isValidated);
+        registrationResponse.setValidate(user.getBloodGroup() != null);
         registrationResponse.setAuthToken(restSecurityUserDetails.getAccessToken().getToken());
         return registrationResponse;
     }
@@ -68,9 +67,4 @@ public class AuthServiceImpl implements AuthService {
         loginResponse.setPhone(user.getPhone());
         return loginResponse;
     }
-
-    public void logout(LogoutRequest logoutCO) {
-        System.out.println("........................................");
-    }
-
 }

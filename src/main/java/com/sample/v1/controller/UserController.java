@@ -4,7 +4,6 @@ import com.sample.generator.ResponseGenerator;
 import com.sample.response.ResponseDTO;
 import com.sample.v1.request.BloodRequestRequest;
 import com.sample.v1.request.UpdateUserRequest;
-import com.sample.v1.service.AuthServiceImpl;
 import com.sample.v1.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -26,7 +25,7 @@ public class UserController extends ResponseGenerator {
         });
     }
 
-    @RequestMapping(value = "/requestBlood", method = RequestMethod.PUT)
+    @RequestMapping(value = "/requestBlood", method = RequestMethod.POST)
     public ResponseDTO requestBlood(@Validated @RequestBody final BloodRequestRequest bloodRequestRequest, BindingResult bindingResult, @RequestHeader(name = "user_id", required = true) String userId) {
         return response(() -> {
             bloodRequestRequest.setUserId(userId);
