@@ -20,6 +20,7 @@ public class RoleUrlMappingDAOImpl implements RoleUrlMappingDAO {
             add("/api/user");
             add("/api/open");
             add("/api/v1/user/update");
+            add("/api/v1/user/requestBlood");
             add("/api/v1/user/");
         }});
 
